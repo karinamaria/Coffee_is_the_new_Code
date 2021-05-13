@@ -19,7 +19,7 @@ public class WishList extends AbstractEntity {
 	private Customer customer;
 	
 	@ManyToMany
-	@JoinTable(name="wishlist_products",
+	@JoinTable(name="wishlist_product",
 	            joinColumns={@JoinColumn(name="wishilist_id")},
 	            inverseJoinColumns={@JoinColumn(name="produto_id")})
     private Set<Product> products;

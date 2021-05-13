@@ -2,10 +2,28 @@ package com.luizacode.Coffee_is_the_new_Code.model;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="customer")
 public class Customer extends AbstractEntity {
-    private String nome;
+	private static final long serialVersionUID = 1L;
+	
+	@Column(name = "nome", nullable = false)
+	private String nome;
+	
+	@Column(name = "email", unique = true, nullable = false)
     private String email;
+	
+	@Column(name = "password", nullable = false)
     private String password;
+    
+    @OneToOne
+    @JoinColumn(name = "wishlist_id", referencedColumnName = "id")
     private WishList wishList;
 
     public Customer (){}

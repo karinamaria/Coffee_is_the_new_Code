@@ -3,9 +3,19 @@ package com.luizacode.Coffee_is_the_new_Code.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
+@MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
-    private Long id;
+    
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	private Long id;
 
     public Long getId() {
         return id;

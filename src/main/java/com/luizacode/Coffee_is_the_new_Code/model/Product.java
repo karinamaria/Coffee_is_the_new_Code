@@ -4,10 +4,26 @@ import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="product")
 public class Product extends AbstractEntity {
-    private String title;
-    private int avaliableQuantity;
+	private static final long serialVersionUID = 1L;
+	
+	@Column(name = "title", unique = true, nullable = false)
+	private String title;
+	
+	@Column(name = "avaliable_quantity", nullable = false)
+    private Integer avaliableQuantity;
+	
+	@Column(name = "price", nullable = false)
     private BigDecimal price;
+    
+    @ManyToMany(mappedBy="products")
     private Set<WishList> wishLists;
 
     public Product (){}
@@ -20,11 +36,11 @@ public class Product extends AbstractEntity {
         this.title = title;
     }
 
-    public int getAvaliableQuantity() {
+    public Integer getAvaliableQuantity() {
         return avaliableQuantity;
     }
 
-    public void setAvaliableQuantity(int avaliableQuantity) {
+    public void setAvaliableQuantity(Integer avaliableQuantity) {
         this.avaliableQuantity = avaliableQuantity;
     }
 

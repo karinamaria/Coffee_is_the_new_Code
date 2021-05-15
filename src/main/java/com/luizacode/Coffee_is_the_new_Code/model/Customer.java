@@ -5,6 +5,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.util.Objects;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @ApiIgnore
 @Entity
@@ -12,13 +13,16 @@ import javax.persistence.*;
 public class Customer extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name = "nome", nullable = false)
+	@Column(name = "nome")
+    @NotEmpty
 	private String nome;
 	
-	@Column(name = "email", unique = true, nullable = false)
+	@Column(name = "email", unique = true)
+    @NotEmpty
     private String email;
 	
-	@Column(name = "password", nullable = false)
+	@Column(name = "password")
+    @NotEmpty
     private String password;
     
     @OneToOne(cascade= CascadeType.PERSIST)

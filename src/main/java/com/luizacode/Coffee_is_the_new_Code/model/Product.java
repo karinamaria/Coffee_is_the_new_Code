@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @ApiIgnore
 @Entity
@@ -14,13 +15,16 @@ import javax.persistence.*;
 public class Product extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name = "title", unique = true, nullable = false)
+	@Column(name = "title", unique = true)
+    @NotEmpty
 	private String title;
 	
-	@Column(name = "avaliable_quantity", nullable = false)
+	@Column(name = "avaliable_quantity")
+    @NotEmpty
     private Integer avaliableQuantity;
 	
-	@Column(name = "price", nullable = false)
+	@Column(name = "price")
+    @NotEmpty
     private BigDecimal price;
 
     @ManyToMany

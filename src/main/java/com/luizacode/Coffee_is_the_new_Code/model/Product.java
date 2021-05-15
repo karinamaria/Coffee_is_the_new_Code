@@ -2,12 +2,12 @@ package com.luizacode.Coffee_is_the_new_Code.model;
 
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.math.BigDecimal;
-import java.util.Objects;
-import java.util.Set;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @ApiIgnore
 @Entity
@@ -31,7 +31,9 @@ public class Product extends AbstractEntity {
             inverseJoinColumns={@JoinColumn(name="wishilist_id")})
     private Set<WishList> wishLists;
 
-    public Product (){}
+    public Product (){
+        wishLists = new HashSet<WishList>();
+    }
 
     public String getTitle() {
         return title;
@@ -71,7 +73,7 @@ public class Product extends AbstractEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Product product = (Product) o;
-        return avaliableQuantity == product.avaliableQuantity && title.equals(product.title) && price.equals(product.price) && wishLists.equals(product.wishLists);
+        return Objects.equals(avaliableQuantity, product.avaliableQuantity) && Objects.equals(title, product.title) && Objects.equals(price, product.price)&& Objects.equals(wishLists, product.wishLists);
     }
 
     @Override

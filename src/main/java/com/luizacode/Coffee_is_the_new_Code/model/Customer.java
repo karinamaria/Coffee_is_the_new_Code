@@ -2,10 +2,9 @@ package com.luizacode.Coffee_is_the_new_Code.model;
 
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.util.Objects;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.Objects;
 
 @ApiIgnore
 @Entity
@@ -29,7 +28,10 @@ public class Customer extends AbstractEntity {
     @JoinColumn(name = "wishlist_id", referencedColumnName = "id")
     private WishList wishList;
 
-    public Customer (){}
+    public Customer ()
+    {
+        wishList = new WishList();
+    }
 
     public WishList getWishList() {
         return wishList;
@@ -67,7 +69,7 @@ public class Customer extends AbstractEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Customer customer = (Customer) o;
-        return nome.equals(customer.nome) && email.equals(customer.email) && password.equals(customer.password) && wishList.equals(customer.wishList);
+        return Objects.equals(nome, customer.nome) && Objects.equals(email, customer.email) && Objects.equals(password, customer.password) && Objects.equals(wishList, customer.wishList);
     }
 
     @Override

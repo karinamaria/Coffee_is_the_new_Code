@@ -1,10 +1,12 @@
 package com.luizacode.Coffee_is_the_new_Code.dto;
 
 import com.luizacode.Coffee_is_the_new_Code.model.WishList;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.math.BigDecimal;
 import java.util.Set;
 
+@ApiIgnore
 public class ProductOutputDto {
     private Long id;
     private String title;

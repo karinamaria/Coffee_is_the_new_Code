@@ -1,12 +1,17 @@
 package com.luizacode.Coffee_is_the_new_Code.dto;
 
-import com.luizacode.Coffee_is_the_new_Code.model.WishList;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "Customer")
 public class CustomerInputDto {
+	@ApiModelProperty(example = "nome", required = true)
 	private String nome;
+	@ApiModelProperty(example = "user@user.com", required = true)
 	private String email;
+	@ApiModelProperty(example = "P@ssw0rd", required = true)
 	private String password;
-	private WishList products;
 	
 	public CustomerInputDto() {
 		
@@ -30,11 +35,5 @@ public class CustomerInputDto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public WishList getProducts() {
-		return products;
-	}
-	public void setProducts(WishList products) {
-		this.products = products;
-	}
-	
+
 }

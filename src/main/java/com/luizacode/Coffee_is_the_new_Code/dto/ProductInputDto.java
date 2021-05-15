@@ -1,15 +1,20 @@
 package com.luizacode.Coffee_is_the_new_Code.dto;
 
 import com.luizacode.Coffee_is_the_new_Code.model.WishList;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.math.BigDecimal;
 import java.util.Set;
 
+@ApiModel(value = "Product")
 public class ProductInputDto {
+    @ApiModelProperty(example = "title", required = true)
     private String title;
+    @ApiModelProperty(example = "100", required = true)
     private Integer avaliableQuantity;
+    @ApiModelProperty(example = "199.99", required = true)
     private BigDecimal price;
-    private Set<WishList> wishLists;
 
     public ProductInputDto() {
     }
@@ -36,13 +41,5 @@ public class ProductInputDto {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public Set<WishList> getWishLists() {
-        return wishLists;
-    }
-
-    public void setWishLists(Set<WishList> wishLists) {
-        this.wishLists = wishLists;
     }
 }

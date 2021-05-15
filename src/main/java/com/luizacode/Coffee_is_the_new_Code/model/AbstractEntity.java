@@ -1,5 +1,7 @@
 package com.luizacode.Coffee_is_the_new_Code.model;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+@ApiIgnore
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
     

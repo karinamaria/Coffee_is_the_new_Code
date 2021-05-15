@@ -1,7 +1,9 @@
 package com.luizacode.Coffee_is_the_new_Code.dto;
 
 import com.luizacode.Coffee_is_the_new_Code.model.WishList;
+import springfox.documentation.annotations.ApiIgnore;
 
+@ApiIgnore
 public class CustomerOutputDto {
     private Long id;
     private String nome;

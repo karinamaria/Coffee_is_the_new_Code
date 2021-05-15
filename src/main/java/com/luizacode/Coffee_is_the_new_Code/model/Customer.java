@@ -1,13 +1,12 @@
 package com.luizacode.Coffee_is_the_new_Code.model;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+@ApiIgnore
 @Entity
 @Table(name="customer")
 public class Customer extends AbstractEntity {
@@ -22,7 +21,7 @@ public class Customer extends AbstractEntity {
 	@Column(name = "password", nullable = false)
     private String password;
     
-    @OneToOne
+    @OneToOne(cascade= CascadeType.PERSIST)
     @JoinColumn(name = "wishlist_id", referencedColumnName = "id")
     private WishList wishList;
 

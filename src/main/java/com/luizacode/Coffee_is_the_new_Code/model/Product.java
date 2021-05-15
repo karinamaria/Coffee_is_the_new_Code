@@ -1,14 +1,14 @@
 package com.luizacode.Coffee_is_the_new_Code.model;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+@ApiIgnore
 @Entity
 @Table(name="product")
 public class Product extends AbstractEntity {
@@ -22,8 +22,11 @@ public class Product extends AbstractEntity {
 	
 	@Column(name = "price", nullable = false)
     private BigDecimal price;
-    
-    @ManyToMany(mappedBy="products")
+
+    @ManyToMany
+    @JoinTable(name="product_wishlist",
+            joinColumns={@JoinColumn(name="produto_id")},
+            inverseJoinColumns={@JoinColumn(name="wishilist_id")})
     private Set<WishList> wishLists;
 
     public Product (){}

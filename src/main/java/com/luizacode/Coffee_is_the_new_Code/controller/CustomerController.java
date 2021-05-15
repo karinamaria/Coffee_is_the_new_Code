@@ -47,18 +47,25 @@ public class CustomerController {
 //    }
 	@PostMapping
 	@ApiOperation(value = "Create an customer")
-	public ResponseEntity<?> register(@RequestBody @Valid CustomerInputDto customer){
-		try{
-			Customer customerModel = modelMapper.map(customer, Customer.class);
-			customerService.validateEmail(customerModel);
-			//criptografar a senha
-			customerModel = customerService.create(customerModel);
-			CustomerOutputDto customerOutput = modelMapper.map(customerModel, CustomerOutputDto.class);
+	public ResponseEntity<?> register(@RequestBody @Valid CustomerInputDto customer) throws NegocioException {
+		Customer customerModel = modelMapper.map(customer, Customer.class);
+		customerService.validateEmail(customerModel);
+		//criptografar a senha
+		customerModel = customerService.create(customerModel);
+		CustomerOutputDto customerOutput = modelMapper.map(customerModel, CustomerOutputDto.class);
 
-			return new ResponseEntity<>(customerOutput, HttpStatus.CREATED);
-		}catch(NegocioException ne){
-			return new ResponseEntity<>(ne.getMessage(), HttpStatus.CONFLICT);
-		}
+		return new ResponseEntity<>(customerOutput, HttpStatus.CREATED);
+//		try{
+//			Customer customerModel = modelMapper.map(customer, Customer.class);
+//			customerService.validateEmail(customerModel);
+//			//criptografar a senha
+//			customerModel = customerService.create(customerModel);
+//			CustomerOutputDto customerOutput = modelMapper.map(customerModel, CustomerOutputDto.class);
+//
+//			return new ResponseEntity<>(customerOutput, HttpStatus.CREATED);
+//		}catch(NegocioException ne){
+//			return new ResponseEntity<>(ne.getMessage(), HttpStatus.CONFLICT);
+//		}
 
 
 

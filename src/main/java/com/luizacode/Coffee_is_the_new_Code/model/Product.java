@@ -20,11 +20,9 @@ public class Product extends AbstractEntity {
 	private String title;
 	
 	@Column(name = "avaliable_quantity")
-    @NotEmpty
     private Integer avaliableQuantity;
 	
 	@Column(name = "price")
-    @NotEmpty
     private BigDecimal price;
 
     @ManyToMany

@@ -1,1 +1,36 @@
-# Coffee is the new Code
+<html>
+<h1>Wishlist</h1>
+<h2>Sobre o Projeto</h2>
+<!--Inserir link do projeto-->
+<p>Wishlist é umas das funcionalidades mais interessantes em um e-commerce. No e-commerce o cliente pode realizar a busca de produtos, ou pode acessar a tela de detalhes do produto.<br>
+Em ambas as telas ele pode selecionar os produtos de sua preferência e armazená-los na sua Wishlist. A qualquer momento o cliente pode visualizar sua Wishlist completa, com todos os produtos que ele selecionou e uma única tela.</p>
+
+<!--Inserir Badges-->
+
+<!--Inserir imagem do projeto final-->
+![logo](https://github.com/gabikenaga/Coffee_is_the_new_Code/blob/master/assets/logo.png)
+
+
+<h2>Pré-requisitos</h2>
+<p>-Cadastro de produto<br>
+  -Cadastro de cliente<br>
+  -Adicionar um produto na Wishlist do cliente<br>
+  -Remover um produto da Wishlist do cliente<br>
+  -Consultar todos os produtos da Wishlist do cliente<br>
+  -Consultar se um determinado produto está na Wishlist do cliente<br>
+  
+</p>
+<h2>Tecnologias Utilizadas</h2>
+<p><b>Back-end</b><br>
+  -Java<br>
+  -Spring Boot<br>
+  -JPA / Hibernate<br>
+  -Maven<br>
+  -ModelMap<br>
+  -MySQL<br>
+  -Swagger<br>
+  
+  <b>Front-end</b><br>
+  <!--Inserir as tecnologias-->
+  </p>
+</html>

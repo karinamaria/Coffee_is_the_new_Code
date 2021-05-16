@@ -1,10 +1,15 @@
 package com.luizacode.Coffee_is_the_new_Code.model;
 
-import java.util.Set;
-
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import java.util.Objects;
+import java.util.Set;
+
 
 @Entity
 @Table(name="wishlist")
@@ -47,7 +52,7 @@ public class WishList extends AbstractEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         WishList wishList = (WishList) o;
-        return customer.equals(wishList.customer) && products.equals(wishList.products);
+        return Objects.equals(customer, wishList.customer) && Objects.equals(products, wishList.products);
     }
     
     

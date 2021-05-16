@@ -2,14 +2,15 @@ package com.luizacode.Coffee_is_the_new_Code.model;
 
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @ApiIgnore
 @Entity
@@ -27,16 +28,13 @@ public class Product extends AbstractEntity {
 	@Column(name = "price")
     private BigDecimal price;
 
-//    @ManyToMany(cascade = CascadeType.PERSIST)
-//    @JoinTable(name="product_wishlist",
-//            joinColumns={@JoinColumn(name="produto_id")},
-//            inverseJoinColumns={@JoinColumn(name="wishilist_id")})
-    //, targetEntity = WishList.class, fetch = FetchType.LAZY
     @ManyToMany(mappedBy="products")
     @JsonIgnore
     private Set<WishList> wishLists;
 
-    public Product (){}
+    public Product (){
+        wishLists = new HashSet<WishList>();
+    }
 
     public String getTitle() {
         return title;
@@ -76,7 +74,7 @@ public class Product extends AbstractEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Product product = (Product) o;
-        return avaliableQuantity == product.avaliableQuantity && title.equals(product.title) && price.equals(product.price) && wishLists.equals(product.wishLists);
+        return Objects.equals(avaliableQuantity, product.avaliableQuantity) && Objects.equals(title, product.title) && Objects.equals(price, product.price)&& Objects.equals(wishLists, product.wishLists);
     }
 
     @Override

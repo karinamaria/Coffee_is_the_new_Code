@@ -7,6 +7,8 @@ import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @ApiIgnore
 @Entity
 @Table(name="customer")
@@ -27,6 +29,7 @@ public class Customer extends AbstractEntity {
     
     @OneToOne(cascade= CascadeType.PERSIST)
     @JoinColumn(name = "wishlist_id", referencedColumnName = "id")
+    @JsonIgnore
     private WishList wishList;
 
     public Customer (){}

@@ -4,12 +4,19 @@ package com.luizacode.Coffee_is_the_new_Code.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotNull;
+
 @ApiModel(value = "Customer")
 public class CustomerInputDto {
+	@NotNull
 	@ApiModelProperty(example = "nome", required = true)
 	private String nome;
+
+	@NotNull
 	@ApiModelProperty(example = "user@user.com", required = true)
 	private String email;
+
+	@NotNull
 	@ApiModelProperty(example = "P@ssw0rd", required = true)
 	private String password;
 	

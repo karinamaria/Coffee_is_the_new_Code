@@ -1,6 +1,7 @@
 package com.luizacode.Coffee_is_the_new_Code.controller;
 
 import com.luizacode.Coffee_is_the_new_Code.dto.ProductInputDto;
+import com.luizacode.Coffee_is_the_new_Code.dto.ProductOutputDto;
 import com.luizacode.Coffee_is_the_new_Code.model.Product;
 import com.luizacode.Coffee_is_the_new_Code.service.ProductService;
 import io.swagger.annotations.ApiModel;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @ApiModel(value = "Product Controller")
 @RestController
@@ -30,7 +32,7 @@ public class ProductController {
     @ApiOperation(value = "Create an product", notes = "Also returns a link to retrieve the saved product in the location header")
     public ResponseEntity<?> register(@RequestBody @Valid ProductInputDto product){
         Product productModel = modelMapper.map(product, Product.class);
-        productModel = productService.create(productModel);
+        productModel = productService.saveOrUpdate(productModel);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -40,5 +42,11 @@ public class ProductController {
 
         return ResponseEntity.created(location).build();
 
+    }
+    
+    @GetMapping
+    @ApiOperation(value = "lists all registered products")
+    public ResponseEntity<?> listAllProducts(){
+    	return new ResponseEntity<>(productService.listsAllProducts(), HttpStatus.OK);
     }
 }

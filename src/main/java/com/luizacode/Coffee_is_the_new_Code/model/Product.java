@@ -9,6 +9,8 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @ApiIgnore
 @Entity
 @Table(name="product")
@@ -25,10 +27,13 @@ public class Product extends AbstractEntity {
 	@Column(name = "price")
     private BigDecimal price;
 
-    @ManyToMany
-    @JoinTable(name="product_wishlist",
-            joinColumns={@JoinColumn(name="produto_id")},
-            inverseJoinColumns={@JoinColumn(name="wishilist_id")})
+//    @ManyToMany(cascade = CascadeType.PERSIST)
+//    @JoinTable(name="product_wishlist",
+//            joinColumns={@JoinColumn(name="produto_id")},
+//            inverseJoinColumns={@JoinColumn(name="wishilist_id")})
+    //, targetEntity = WishList.class, fetch = FetchType.LAZY
+    @ManyToMany(mappedBy="products")
+    @JsonIgnore
     private Set<WishList> wishLists;
 
     public Product (){}

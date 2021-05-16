@@ -1,12 +1,10 @@
 package com.luizacode.Coffee_is_the_new_Code.model;
 
-import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Entity;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="wishlist")
@@ -14,9 +12,15 @@ public class WishList extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 	
 	@OneToOne(mappedBy = "wishList")
+	@JsonBackReference
 	private Customer customer;
 
-    @ManyToMany(mappedBy="wishLists")
+    //@ManyToMany(mappedBy="wishLists") , targetEntity = Product.class, fetch = FetchType.EAGER
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name="wishlist_product",
+            joinColumns={@JoinColumn(name="wishilist_id")},
+            inverseJoinColumns={@JoinColumn(name="produto_id")})
+    @JsonBackReference
     private Set<Product> products;
 
     public WishList (){}
@@ -45,9 +49,6 @@ public class WishList extends AbstractEntity {
         WishList wishList = (WishList) o;
         return customer.equals(wishList.customer) && products.equals(wishList.products);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), customer, products);
-    }
+    
+    
 }

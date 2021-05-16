@@ -13,8 +13,16 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public Customer create(Customer customer){
+    public Customer saveOrUpdate(Customer customer){
         return customerRepository.save(customer);
+    }
+    
+    public void delete(Customer customer) {
+    	customerRepository.delete(customer);
+    }
+    
+    public Customer findById(Long id) {
+    	return customerRepository.findById(id).orElse(null);
     }
 
     public void validateEmail(Customer customer) throws NegocioException {

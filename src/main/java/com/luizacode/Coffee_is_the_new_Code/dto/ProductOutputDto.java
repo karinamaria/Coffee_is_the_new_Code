@@ -1,6 +1,8 @@
 package com.luizacode.Coffee_is_the_new_Code.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.luizacode.Coffee_is_the_new_Code.model.WishList;
+
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.math.BigDecimal;
@@ -12,6 +14,7 @@ public class ProductOutputDto {
     private String title;
     private Integer avaliableQuantity;
     private BigDecimal price;
+    @JsonIgnore
     private Set<WishList> wishLists;
 
     public ProductOutputDto() {

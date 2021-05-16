@@ -32,42 +32,15 @@ public class CustomerController {
 	@Autowired
 	private ModelMapper modelMapper;
 
-//	@PostMapping
-//	@ResponseStatus(HttpStatus.CREATED)
-//	@ApiOperation(value = "Create an customer", notes = "Also returns a link to retrieve the saved customer in the location header")
-//    public ResponseEntity<CustomerInputDto> register(@RequestBody @Valid CustomerInputDto customer){
-//    	Customer customerModel = modelMapper.map(customer, Customer.class);
-//    	customerModel = customerService.create(customerModel);
-//        URI location = ServletUriComponentsBuilder
-//                .fromCurrentRequest()
-//                .path("/{id}")
-//                .buildAndExpand(customerModel.getId())
-//                .toUri();
-//        return ResponseEntity.created(location).build();
-//    }
 	@PostMapping
 	@ApiOperation(value = "Create an customer")
-	public ResponseEntity<?> register(@RequestBody @Valid CustomerInputDto customer) throws NegocioException {
+	public ResponseEntity<?> register(@RequestBody @Valid CustomerInputDto customer){
 		Customer customerModel = modelMapper.map(customer, Customer.class);
-		customerService.validateEmail(customerModel);
+		//customerService.validateEmail(customerModel);
 		//criptografar a senha
-		customerModel = customerService.create(customerModel);
+		customerModel = customerService.saveOrUpdate(customerModel);
 		CustomerOutputDto customerOutput = modelMapper.map(customerModel, CustomerOutputDto.class);
 
 		return new ResponseEntity<>(customerOutput, HttpStatus.CREATED);
-//		try{
-//			Customer customerModel = modelMapper.map(customer, Customer.class);
-//			customerService.validateEmail(customerModel);
-//			//criptografar a senha
-//			customerModel = customerService.create(customerModel);
-//			CustomerOutputDto customerOutput = modelMapper.map(customerModel, CustomerOutputDto.class);
-//
-//			return new ResponseEntity<>(customerOutput, HttpStatus.CREATED);
-//		}catch(NegocioException ne){
-//			return new ResponseEntity<>(ne.getMessage(), HttpStatus.CONFLICT);
-//		}
-
-
-
 	}
 }

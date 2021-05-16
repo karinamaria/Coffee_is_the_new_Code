@@ -1,5 +1,8 @@
 package com.luizacode.Coffee_is_the_new_Code.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 import io.swagger.annotations.ApiModelProperty;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -7,10 +10,13 @@ import springfox.documentation.annotations.ApiIgnore;
 public class WishListInputDto {
 //	@ApiModelProperty(example = "1", required = true)
 //	private Long idWishList;
-
+	@NotNull
+	@Positive
 	@ApiModelProperty(example = "1", required = true)
 	private Long idProduct;
 
+	@NotNull
+	@Positive
 	@ApiModelProperty(example = "1", required = true)
 	private Long idCustomer;
 

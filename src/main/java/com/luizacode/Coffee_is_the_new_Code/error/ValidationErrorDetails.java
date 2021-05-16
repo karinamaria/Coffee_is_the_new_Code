@@ -3,7 +3,29 @@ package com.luizacode.Coffee_is_the_new_Code.error;
 public class ValidationErrorDetails extends ErrorDetail{
     private String field;
     private String fieldMessage;
-    public static final class Builder {
+    
+    
+	public String getField() {
+		return field;
+	}
+
+
+	public void setField(String field) {
+		this.field = field;
+	}
+
+
+	public String getFieldMessage() {
+		return fieldMessage;
+	}
+
+
+	public void setFieldMessage(String fieldMessage) {
+		this.fieldMessage = fieldMessage;
+	}
+
+
+	public static final class Builder {
         private String title;
         private int status;
         private String detail;
@@ -14,7 +36,7 @@ public class ValidationErrorDetails extends ErrorDetail{
 
         private Builder(){}
 
-        public static Builder newBuilder(){ return newBuilder();}
+        public static Builder newBuilder(){ return new Builder();}
 
         public Builder title(String title){
             this.title=title;
@@ -51,8 +73,8 @@ public class ValidationErrorDetails extends ErrorDetail{
             ne.setStatus(this.status);
             ne.setDeveloperMessage(this.developerMessage);
             ne.setTimestamp(this.timestamp);
-            ne.field=field;
-            ne.fieldMessage=fieldMessage;
+            ne.setField(this.field);
+            ne.setFieldMessage(this.fieldMessage);
             return ne;
         }
     }

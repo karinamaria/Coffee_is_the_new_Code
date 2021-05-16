@@ -48,7 +48,7 @@ public class WishListService {
         wishListModel.setCustomer(customerService.findById(wishListInputDto.getIdCustomer()));
         
         wishListModel = wishListRepository.save(wishListModel);
-        
+
         if(Objects.isNull(customer.getWishList())) {
         	customer.setWishList(wishListModel);
         	customerService.saveOrUpdate(customer);
@@ -76,9 +76,9 @@ public class WishListService {
             }
 
             if(wishList.getProducts().size() == 0) {
-                wishListRepository.delete(wishList);
                 customer.setWishList(null);
                 customerService.saveOrUpdate(customer);
+                wishListRepository.delete(wishList);
             }
         }
     	

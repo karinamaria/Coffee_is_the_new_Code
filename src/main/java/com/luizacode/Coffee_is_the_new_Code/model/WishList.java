@@ -21,7 +21,7 @@ public class WishList extends AbstractEntity {
 	private Customer customer;
 
     //@ManyToMany(mappedBy="wishLists") , targetEntity = Product.class, fetch = FetchType.EAGER
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JoinTable(name="wishlist_product",
             joinColumns={@JoinColumn(name="wishilist_id")},
             inverseJoinColumns={@JoinColumn(name="produto_id")})

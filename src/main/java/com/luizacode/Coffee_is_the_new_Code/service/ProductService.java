@@ -26,10 +26,8 @@ public class ProductService {
 	}
 
 	public Product findById(Long id) {
-		Product product = productRepository.findById(id).orElse(null);
-		if(Objects.isNull(product)){
-			throw new ResourceNotFoundException("Product not found for ID: "+id);
-		}
+		Product product = productRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Product not found for ID: "+id));
+		
 		return product;
 	}
 

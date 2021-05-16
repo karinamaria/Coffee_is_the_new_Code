@@ -26,7 +26,7 @@ public class Customer extends AbstractEntity {
     @NotEmpty
     private String password;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "wishlist_id", referencedColumnName = "id")
     @JsonIgnore
     private WishList wishList;

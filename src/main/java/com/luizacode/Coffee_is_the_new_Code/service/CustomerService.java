@@ -3,7 +3,9 @@ package com.luizacode.Coffee_is_the_new_Code.service;
 import com.luizacode.Coffee_is_the_new_Code.error.ResourceNotFoundException;
 import com.luizacode.Coffee_is_the_new_Code.error.NegocioException;
 import com.luizacode.Coffee_is_the_new_Code.model.Customer;
+import com.luizacode.Coffee_is_the_new_Code.model.WishList;
 import com.luizacode.Coffee_is_the_new_Code.repository.CustomerRepository;
+import com.luizacode.Coffee_is_the_new_Code.repository.WishListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +16,18 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private WishListRepository wishListRepository;
+
     public Customer saveOrUpdate(Customer customer){
-        return customerRepository.save(customer);
+        Customer aux = customerRepository.save(customer);
+
+        WishList wishList = aux.getWishList();
+        aux.setWishList(null);
+        customerRepository.save(customer);
+        wishListRepository.delete(wishList);
+
+        return aux;
     }
     
     public void delete(Customer customer) {
@@ -23,10 +35,8 @@ public class CustomerService {
     }
     
     public Customer findById(Long id) {
-        Customer customer = customerRepository.findById(id).orElse(null);
-        if(Objects.isNull(customer)){
-            throw new ResourceNotFoundException("Customer not found for ID: "+id);
-        }
+        Customer customer = customerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Customer not found for ID: "+id));
+
         return customer;
     }
 

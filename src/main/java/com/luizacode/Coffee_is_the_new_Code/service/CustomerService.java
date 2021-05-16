@@ -1,6 +1,7 @@
 package com.luizacode.Coffee_is_the_new_Code.service;
 
-import com.luizacode.Coffee_is_the_new_Code.exception.NegocioException;
+import com.luizacode.Coffee_is_the_new_Code.error.ResourceNotFoundException;
+import com.luizacode.Coffee_is_the_new_Code.error.NegocioException;
 import com.luizacode.Coffee_is_the_new_Code.model.Customer;
 import com.luizacode.Coffee_is_the_new_Code.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,14 @@ public class CustomerService {
     }
     
     public Customer findById(Long id) {
-    	return customerRepository.findById(id).orElse(null);
+        Customer customer = customerRepository.findById(id).orElse(null);
+        if(Objects.isNull(customer)){
+            throw new ResourceNotFoundException("Customer not found for ID: "+id);
+        }
+        return customer;
     }
 
-    public void validateEmail(Customer customer) throws NegocioException {
+    public void verificarExistenciaEmail(Customer customer){
         Customer aux = customerRepository.findByEmail(customer.getEmail());
         if(Objects.nonNull(aux)){
             throw new NegocioException("Email is already registered");

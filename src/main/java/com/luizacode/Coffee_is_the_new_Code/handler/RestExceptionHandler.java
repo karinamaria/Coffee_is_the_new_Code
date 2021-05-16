@@ -4,6 +4,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.luizacode.Coffee_is_the_new_Code.error.ErrorDetail;
+import com.luizacode.Coffee_is_the_new_Code.error.ResourceNotFoundException;
+import com.luizacode.Coffee_is_the_new_Code.error.NegocioException;
+import com.sun.org.apache.xpath.internal.operations.Neg;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -15,6 +19,19 @@ import com.luizacode.Coffee_is_the_new_Code.error.ValidationErrorDetails;
 
 @ControllerAdvice
 public class RestExceptionHandler {
+
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<?> handlerResourceNotFoundException(ResourceNotFoundException rnfException){
+		ErrorDetail rnfDetais = ErrorDetail.ErrorDetailBuilder
+				.newBuilder()
+				.timestamp(new Date().getTime())
+				.status(HttpStatus.NOT_FOUND.value())
+				.title("Resource not found")
+				.detail(rnfException.getMessage())
+				.developerMessage(rnfException.getClass().getName())
+				.build();
+		return new ResponseEntity<>(rnfDetais, HttpStatus.NOT_FOUND);
+	}
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<?> handlerMethodArgumentNotValidException(MethodArgumentNotValidException manveException){
 		List<FieldError> fieldErrors = manveException.getBindingResult().getFieldErrors();

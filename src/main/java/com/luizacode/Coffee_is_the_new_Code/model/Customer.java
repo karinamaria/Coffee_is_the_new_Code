@@ -18,7 +18,7 @@ public class Customer extends AbstractEntity {
     @NotEmpty
 	private String nome;
 	
-	@Column(name = "email", unique = true)
+	@Column(name = "email")
     @NotEmpty
     private String email;
 	
@@ -26,7 +26,7 @@ public class Customer extends AbstractEntity {
     @NotEmpty
     private String password;
     
-    @OneToOne(cascade= CascadeType.PERSIST)
+    @OneToOne
     @JoinColumn(name = "wishlist_id", referencedColumnName = "id")
     @JsonIgnore
     private WishList wishList;

@@ -2,7 +2,6 @@ package com.luizacode.Coffee_is_the_new_Code.controller;
 
 import com.luizacode.Coffee_is_the_new_Code.dto.CustomerInputDto;
 import com.luizacode.Coffee_is_the_new_Code.dto.CustomerOutputDto;
-import com.luizacode.Coffee_is_the_new_Code.exception.NegocioException;
 import com.luizacode.Coffee_is_the_new_Code.model.Customer;
 
 import com.luizacode.Coffee_is_the_new_Code.service.CustomerService;
@@ -14,10 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import javax.validation.Valid;
@@ -34,13 +30,21 @@ public class CustomerController {
 
 	@PostMapping
 	@ApiOperation(value = "Create an customer")
-	public ResponseEntity<?> register(@RequestBody @Valid CustomerInputDto customer){
+	public ResponseEntity<?> save(@RequestBody @Valid CustomerInputDto customer){
 		Customer customerModel = modelMapper.map(customer, Customer.class);
-		//customerService.validateEmail(customerModel);
+		//customerService.verificarExistenciaEmail(customerModel);
 		//criptografar a senha
 		customerModel = customerService.saveOrUpdate(customerModel);
 		CustomerOutputDto customerOutput = modelMapper.map(customerModel, CustomerOutputDto.class);
 
 		return new ResponseEntity<>(customerOutput, HttpStatus.CREATED);
+	}
+	@GetMapping("/{idCustomer}")
+	@ApiOperation(value = "Find customer by id")
+	public ResponseEntity<?> findCustomerById(@PathVariable Long idCustomer){
+		Customer customer = customerService.findById(idCustomer);
+		CustomerOutputDto customerOutputDto = modelMapper.map(customer, CustomerOutputDto.class);
+
+		return new ResponseEntity<>(customerOutputDto, HttpStatus.OK);
 	}
 }

@@ -28,12 +28,11 @@ public class WishListService {
     
     public WishList findById(Long id) {
     	WishList wishList = wishListRepository.findById(id).orElse(null);
-    	
+
     	return wishList;
     }
     
     public WishList saveOrUpdate(WishListInputDto wishListInputDto){
-        //tratar execeção quando não for encontrado produto
         Product product = productService.findById(wishListInputDto.getIdProduct());
         Customer customer = customerService.findById(wishListInputDto.getIdCustomer());
         
@@ -66,23 +65,22 @@ public class WishListService {
 
     public void deleteProductOfWishlist(WishListInputDto wishListInputDto){
     	Customer customer = customerService.findById(wishListInputDto.getIdCustomer());
-        //buscar wishlist
-    	WishList wishList = findById(customer.getWishList().getId());
     	
-    	//Se wishList for null lançar exceção informando que cliente não possui wishList
-    	
-    	//Buscar Produto que será excluido
-    	Product product = productService.findById(wishListInputDto.getIdProduct());
-    	
-    	if(wishList.getProducts().contains(product)) {
-    		wishList.getProducts().remove(product);
-    	}
-    	
-    	if(wishList.getProducts().size() == 0) {
-    		wishListRepository.delete(wishList);
-    		customer.setWishList(null);
-    		customerService.saveOrUpdate(customer);
-    	}
+    	if(Objects.nonNull(customer.getWishList())){
+    	    WishList wishList = customer.getWishList();
+            //Buscar Produto que será excluido
+            Product product = productService.findById(wishListInputDto.getIdProduct());
+
+            if(wishList.getProducts().contains(product)) {
+                wishList.getProducts().remove(product);
+            }
+
+            if(wishList.getProducts().size() == 0) {
+                wishListRepository.delete(wishList);
+                customer.setWishList(null);
+                customerService.saveOrUpdate(customer);
+            }
+        }
     	
     }
     

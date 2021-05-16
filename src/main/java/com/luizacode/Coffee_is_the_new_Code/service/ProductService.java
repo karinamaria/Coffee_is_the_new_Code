@@ -1,10 +1,12 @@
 package com.luizacode.Coffee_is_the_new_Code.service;
 
+import com.luizacode.Coffee_is_the_new_Code.error.ResourceNotFoundException;
 import com.luizacode.Coffee_is_the_new_Code.model.Product;
 import com.luizacode.Coffee_is_the_new_Code.dto.ProductOutputDto;
 import com.luizacode.Coffee_is_the_new_Code.repository.ProductRepository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -24,7 +26,11 @@ public class ProductService {
 	}
 
 	public Product findById(Long id) {
-		return productRepository.findById(id).orElse(null);
+		Product product = productRepository.findById(id).orElse(null);
+		if(Objects.isNull(product)){
+			throw new ResourceNotFoundException("Product not found for ID: "+id);
+		}
+		return product;
 	}
 
 	public List<ProductOutputDto> listsAllProducts() {
@@ -34,4 +40,5 @@ public class ProductService {
 				.map(element -> modelMapper.map(element, ProductOutputDto.class)).collect(Collectors.toList());
 		return productOutput;
 	}
+
 }

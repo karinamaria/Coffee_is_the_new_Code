@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Product extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name = "title", unique = true)
+	@Column(name = "title")
     @NotEmpty
 	private String title;
 	

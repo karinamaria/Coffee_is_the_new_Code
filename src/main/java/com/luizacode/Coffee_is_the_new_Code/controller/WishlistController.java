@@ -2,6 +2,8 @@ package com.luizacode.Coffee_is_the_new_Code.controller;
 
 import com.luizacode.Coffee_is_the_new_Code.dto.WishListInputDto;
 import com.luizacode.Coffee_is_the_new_Code.model.WishList;
+import com.luizacode.Coffee_is_the_new_Code.service.CustomerService;
+import com.luizacode.Coffee_is_the_new_Code.service.ProductService;
 import com.luizacode.Coffee_is_the_new_Code.service.WishListService;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
@@ -18,6 +20,11 @@ import java.net.URI;
 @RestController
 @RequestMapping("/api/v1/wishlist")
 public class WishlistController {
+    @Autowired
+    private CustomerService customerService;
+
+    @Autowired
+    private ProductService productService;
 
     @Autowired
     private WishListService wishListService;
@@ -26,8 +33,7 @@ public class WishlistController {
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Adds a product to wishList", notes = "Also returns a link to retrieve the saved wishList in the location header")
     public ResponseEntity<?> register(@RequestBody @Valid WishListInputDto wishListInputDto){
-        WishList wishListModel = new WishList();
-        wishListModel = wishListService.saveOrUpdate(wishListInputDto);
+        WishList wishListModel = wishListService.saveOrUpdate(wishListInputDto);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -44,7 +50,7 @@ public class WishlistController {
     
     @GetMapping("/{idCustomer}/{idProduct}")
     @ResponseStatus(HttpStatus.OK)
-    @ApiOperation(value = "checks if a wishlist has a product")
+    @ApiOperation(value = "Checks if a wishlist has a product")
     public ResponseEntity<String> consultProductWishlist(@PathVariable("idCustomer") Long idCustomer, @PathVariable("idProduct") Long idProduct){
         String resultado = "A wishList possui o produto";
         

@@ -15,7 +15,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 
 @ApiModel(value = "Product Controller")
 @RestController
@@ -32,7 +31,7 @@ public class ProductController {
     @ApiOperation(value = "Create an product", notes = "Also returns a link to retrieve the saved product in the location header")
     public ResponseEntity<?> register(@RequestBody @Valid ProductInputDto product){
         Product productModel = modelMapper.map(product, Product.class);
-        productModel = productService.saveOrUpdate(productModel);
+        productModel = productService.save(productModel);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

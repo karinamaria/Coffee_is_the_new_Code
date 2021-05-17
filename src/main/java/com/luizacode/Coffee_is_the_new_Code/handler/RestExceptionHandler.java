@@ -22,7 +22,7 @@ public class RestExceptionHandler {
 
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<?> handlerResourceNotFoundException(ResourceNotFoundException rnfException){
-		ErrorDetail rnfDetais = ErrorDetail.ErrorDetailBuilder
+		ErrorDetail rnfDetails = ErrorDetail.ErrorDetailBuilder
 				.newBuilder()
 				.timestamp(new Date().getTime())
 				.status(HttpStatus.NOT_FOUND.value())
@@ -30,8 +30,22 @@ public class RestExceptionHandler {
 				.detail(rnfException.getMessage())
 				.developerMessage(rnfException.getClass().getName())
 				.build();
-		return new ResponseEntity<>(rnfDetais, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(rnfDetails, HttpStatus.NOT_FOUND);
 	}
+
+	@ExceptionHandler(NegocioException.class)
+	public ResponseEntity<?> handlerNegocioException(NegocioException rnfException){
+		ErrorDetail rnfDetails = ErrorDetail.ErrorDetailBuilder
+				.newBuilder()
+				.timestamp(new Date().getTime())
+				.status(HttpStatus.CONFLICT.value())
+				.title("Business rule error")
+				.detail(rnfException.getMessage())
+				.developerMessage(rnfException.getClass().getName())
+				.build();
+		return new ResponseEntity<>(rnfDetails, HttpStatus.CONFLICT);
+	}
+
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<?> handlerMethodArgumentNotValidException(MethodArgumentNotValidException manveException){
 		List<FieldError> fieldErrors = manveException.getBindingResult().getFieldErrors();

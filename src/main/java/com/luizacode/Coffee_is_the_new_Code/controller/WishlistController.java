@@ -33,7 +33,7 @@ public class WishlistController {
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Adds a product to wishList", notes = "Also returns a link to retrieve the saved wishList in the location header")
     public ResponseEntity<?> register(@RequestBody @Valid WishListInputDto wishListInputDto){
-        WishList wishListModel = wishListService.saveOrUpdate(wishListInputDto);
+        WishList wishListModel = wishListService.save(wishListInputDto);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

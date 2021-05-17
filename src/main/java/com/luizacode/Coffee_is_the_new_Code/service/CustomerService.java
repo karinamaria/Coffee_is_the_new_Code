@@ -3,9 +3,7 @@ package com.luizacode.Coffee_is_the_new_Code.service;
 import com.luizacode.Coffee_is_the_new_Code.error.ResourceNotFoundException;
 import com.luizacode.Coffee_is_the_new_Code.error.NegocioException;
 import com.luizacode.Coffee_is_the_new_Code.model.Customer;
-import com.luizacode.Coffee_is_the_new_Code.model.WishList;
 import com.luizacode.Coffee_is_the_new_Code.repository.CustomerRepository;
-import com.luizacode.Coffee_is_the_new_Code.repository.WishListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +14,8 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public Customer saveOrUpdate(Customer customer){
-
+    public Customer save(Customer customer){
+        verificarExistenciaEmail(customer);
         customer.setWishList(null);
         customer = customerRepository.save(customer);
 

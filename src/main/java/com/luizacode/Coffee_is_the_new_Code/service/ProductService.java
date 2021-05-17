@@ -6,7 +6,6 @@ import com.luizacode.Coffee_is_the_new_Code.dto.ProductOutputDto;
 import com.luizacode.Coffee_is_the_new_Code.repository.ProductRepository;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -21,7 +20,7 @@ public class ProductService {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	public Product saveOrUpdate(Product product) {
+	public Product save(Product product) {
 		return productRepository.save(product);
 	}
 

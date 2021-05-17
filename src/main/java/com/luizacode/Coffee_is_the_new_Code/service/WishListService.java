@@ -32,7 +32,7 @@ public class WishListService {
     	return wishList;
     }
     
-    public WishList saveOrUpdate(WishListInputDto wishListInputDto){
+    public WishList save(WishListInputDto wishListInputDto){
         Product product = productService.findById(wishListInputDto.getIdProduct());
         Customer customer = customerService.findById(wishListInputDto.getIdCustomer());
         
@@ -51,7 +51,7 @@ public class WishListService {
 
         if(Objects.isNull(customer.getWishList())) {
         	customer.setWishList(wishListModel);
-        	customerService.saveOrUpdate(customer);
+        	customerService.save(customer);
         }
         return wishListModel;
     }
@@ -77,7 +77,7 @@ public class WishListService {
 
             if(wishList.getProducts().size() == 0) {
                 customer.setWishList(null);
-                customerService.saveOrUpdate(customer);
+                customerService.save(customer);
                 wishListRepository.delete(wishList);
             }
         }

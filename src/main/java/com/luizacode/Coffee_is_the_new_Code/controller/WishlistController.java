@@ -44,8 +44,8 @@ public class WishlistController {
     }
     @GetMapping("/{id}")
     @ApiOperation(value = "Returns all products from the wishlist")
-    public ResponseEntity<?> consultWishlist(@PathVariable("id") Long id){
-        return new ResponseEntity<>(wishListService.findAll(id), HttpStatus.OK);
+    public ResponseEntity<?> consultWishlist(@PathVariable("id") Long idWishList){
+        return new ResponseEntity<>(wishListService.findAll(idWishList), HttpStatus.OK);
     }
     
     @GetMapping("/{idCustomer}/{idProduct}")

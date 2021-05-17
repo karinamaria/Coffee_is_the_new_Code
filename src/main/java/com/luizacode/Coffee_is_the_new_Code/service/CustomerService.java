@@ -16,18 +16,12 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    @Autowired
-    private WishListRepository wishListRepository;
-
     public Customer saveOrUpdate(Customer customer){
-        Customer aux = customerRepository.save(customer);
 
-        WishList wishList = aux.getWishList();
-        aux.setWishList(null);
-        customerRepository.save(customer);
-        wishListRepository.delete(wishList);
+        customer.setWishList(null);
+        customer = customerRepository.save(customer);
 
-        return aux;
+        return customer;
     }
     
     public void delete(Customer customer) {

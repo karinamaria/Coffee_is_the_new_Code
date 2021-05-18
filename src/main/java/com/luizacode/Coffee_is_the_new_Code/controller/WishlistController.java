@@ -2,8 +2,6 @@ package com.luizacode.Coffee_is_the_new_Code.controller;
 
 import com.luizacode.Coffee_is_the_new_Code.dto.WishListInputDto;
 import com.luizacode.Coffee_is_the_new_Code.model.WishList;
-import com.luizacode.Coffee_is_the_new_Code.service.CustomerService;
-import com.luizacode.Coffee_is_the_new_Code.service.ProductService;
 import com.luizacode.Coffee_is_the_new_Code.service.WishListService;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
@@ -21,12 +19,6 @@ import java.net.URI;
 @RequestMapping("/api/v1/wishlist")
 public class WishlistController {
     @Autowired
-    private CustomerService customerService;
-
-    @Autowired
-    private ProductService productService;
-
-    @Autowired
     private WishListService wishListService;
 
     @PostMapping
@@ -42,9 +34,9 @@ public class WishlistController {
                 .toUri();
         return ResponseEntity.created(location).build();
     }
-    @GetMapping("/{id}")
+    @GetMapping("/{idWishlist}")
     @ApiOperation(value = "Returns all products from the wishlist")
-    public ResponseEntity<?> consultWishlist(@PathVariable("id") Long idWishList){
+    public ResponseEntity<?> consultWishlist(@PathVariable("idWishlist") Long idWishList){
         return new ResponseEntity<>(wishListService.findAll(idWishList), HttpStatus.OK);
     }
     

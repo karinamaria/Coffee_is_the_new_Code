@@ -32,8 +32,6 @@ public class CustomerController {
 	@ApiOperation(value = "Create an customer")
 	public ResponseEntity<?> save(@RequestBody @Valid CustomerInputDto customer){
 		Customer customerModel = modelMapper.map(customer, Customer.class);
-		//customerService.verificarExistenciaEmail(customerModel);
-		//criptografar a senha
 		customerModel = customerService.save(customerModel);
 		CustomerOutputDto customerOutput = modelMapper.map(customerModel, CustomerOutputDto.class);
 

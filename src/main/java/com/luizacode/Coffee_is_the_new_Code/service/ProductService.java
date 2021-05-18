@@ -8,11 +8,13 @@ import com.luizacode.Coffee_is_the_new_Code.repository.ProductRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class ProductService {
 	@Autowired
 	private ProductRepository productRepository;
@@ -21,7 +23,9 @@ public class ProductService {
 	private ModelMapper modelMapper;
 
 	public Product save(Product product) {
-		return productRepository.save(product);
+		product = productRepository.save(product);
+		log.info("Product was saved");
+		return product;
 	}
 
 	public Product findById(Long id) {
@@ -31,6 +35,7 @@ public class ProductService {
 	}
 
 	public List<ProductOutputDto> listsAllProducts() {
+		log.info("Searching all registered products");
 		List<Product> products = productRepository.findAll();
 
 		List<ProductOutputDto> productOutput = products.stream()

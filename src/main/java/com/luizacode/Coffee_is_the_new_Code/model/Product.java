@@ -9,13 +9,16 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 @ApiIgnore
 @Entity
 @Table(name="product")
 public class Product extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name = "title", unique = true)
+	@Column(name = "title")
     @NotEmpty
 	private String title;
 	
@@ -25,10 +28,8 @@ public class Product extends AbstractEntity {
 	@Column(name = "price")
     private BigDecimal price;
 
-    @ManyToMany
-    @JoinTable(name="product_wishlist",
-            joinColumns={@JoinColumn(name="produto_id")},
-            inverseJoinColumns={@JoinColumn(name="wishilist_id")})
+    @ManyToMany(mappedBy="products")
+    @JsonIgnore
     private Set<WishList> wishLists;
 
     public Product (){

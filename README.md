@@ -6,10 +6,9 @@
 Em ambas as telas ele pode selecionar os produtos de sua preferência e armazená-los na sua Wishlist. A qualquer momento o cliente pode visualizar sua Wishlist completa, com todos os produtos que ele selecionou e uma única tela.</p>
 
 <!--Inserir Badges-->
-
-<!--Inserir imagem do projeto final-->
-![logo](https://github.com/gabikenaga/Coffee_is_the_new_Code/blob/master/assets/logo.png)
-
+<h2>Diagrama de Classes</h2> 
+<!--![Diagrama](https://github.com/gabikenaga/Coffee_is_the_new_Code/blob/master/assets/Diagrama.png)-->  
+<img src="https://github.com/gabikenaga/Coffee_is_the_new_Code/blob/master/assets/Diagrama.png" alt="Your image title" width="300"/>  
 
 <h2>Pré-requisitos</h2>
 <p>-Cadastro de produto<br>

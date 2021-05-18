@@ -87,6 +87,7 @@ public class WishListService {
 
         if(wishList.getProducts().contains(product)) {
             wishList.getProducts().remove(product);
+            wishListRepository.save(wishList);
             log.info("Deleted product");
         }
 

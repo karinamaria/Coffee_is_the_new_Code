@@ -17,8 +17,11 @@ Em ambas as telas ele pode selecionar os produtos de sua preferência e armazen�
   -Remover um produto da Wishlist do cliente<br>
   -Consultar todos os produtos da Wishlist do cliente<br>
   -Consultar se um determinado produto está na Wishlist do cliente<br>
+  </p>
   
-</p>
+<h2>Desenvolvimento</h2>
+<p>Caso queira evoluir o projeto e incluir novas funcionalidades é necessário cloná-lo, importá-lo para a sua IDE, instalar o JDK do Java e o MySQL. Por fim basta executar a classe CoffeeIsTheNewCodeApplication.java.<br></p>
+  
 <h2>Tecnologias Utilizadas</h2>
 <p><b>Back-end</b><br>
   -Java<br>

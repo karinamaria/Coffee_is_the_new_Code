@@ -2,6 +2,7 @@ package com.luizacode.Coffee_is_the_new_Code.service;
 
 import com.luizacode.Coffee_is_the_new_Code.dto.WishListInputDto;
 import com.luizacode.Coffee_is_the_new_Code.dto.WishListOutputDto;
+import com.luizacode.Coffee_is_the_new_Code.error.NegocioException;
 import com.luizacode.Coffee_is_the_new_Code.error.ResourceNotFoundException;
 import com.luizacode.Coffee_is_the_new_Code.model.Customer;
 import com.luizacode.Coffee_is_the_new_Code.model.Product;
@@ -17,6 +18,9 @@ import java.util.*;
 @Service
 @Slf4j
 public class WishListService {
+
+    private static final Integer MAXIMUM_AMOUNT_OF_PRODUCTS = 20;
+
     @Autowired
     private WishListRepository wishListRepository;
 
@@ -38,19 +42,18 @@ public class WishListService {
     public WishList save(WishListInputDto wishListInputDto){
         Product product = productService.findById(wishListInputDto.getIdProduct());
         Customer customer = customerService.findById(wishListInputDto.getIdCustomer());
-
-        log.info("Adding product to customer's wishlist");
-
         WishList wishListModel = new WishList();
 
         if(Objects.isNull(customer.getWishList())){
             wishListModel.setProducts(new HashSet<Product>());
         }else {
         	wishListModel = customer.getWishList();
+            validarQuantidadeProdutosWishlist(wishListModel);
         }
+        log.info("Adding product to customer's wishlist");
         
         wishListModel.getProducts().add(product);
-        wishListModel.setCustomer(customerService.findById(wishListInputDto.getIdCustomer()));
+        wishListModel.setCustomer(customer);
         
         wishListModel = wishListRepository.save(wishListModel);
 
@@ -81,7 +84,7 @@ public class WishListService {
         }
 
     	WishList wishList = customer.getWishList();
-        //Buscar Produto que será excluido
+
         Product product = productService.findById(wishListInputDto.getIdProduct());
         log.info("Deleting product id: "+ product.getId()+" from wishlist");
 
@@ -104,11 +107,16 @@ public class WishListService {
     	if(Objects.nonNull(customer.getWishList().getProducts())) {
     		Product product = productService.findById(idProduct);
     		log.info("Searching for product id: "+ product.getId() +" on wishlist id: "+customer.getWishList().getId());
-    		if(Objects.nonNull(product)) {
-    			wishListHasProduct = customer.getWishList().getProducts().contains(product);
-    		}
+    		wishListHasProduct = customer.getWishList().getProducts().contains(product);
     	}
     	
     	return wishListHasProduct;
     }
+    public void validarQuantidadeProdutosWishlist(WishList wishList){
+        if(wishList.getProducts().size() == MAXIMUM_AMOUNT_OF_PRODUCTS){
+            log.warn("It is not possible to add more products to the customer's wishlist id: "+wishList.getCustomer().getId());
+            throw new NegocioException("It is not possible to add more products to the customer's wishlist id: "+wishList.getCustomer().getId());
+        }
+    }
 }
+

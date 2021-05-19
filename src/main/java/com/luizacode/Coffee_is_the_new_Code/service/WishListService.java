@@ -8,16 +8,18 @@ import com.luizacode.Coffee_is_the_new_Code.model.Customer;
 import com.luizacode.Coffee_is_the_new_Code.model.Product;
 import com.luizacode.Coffee_is_the_new_Code.model.WishList;
 import com.luizacode.Coffee_is_the_new_Code.repository.WishListRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 
 @Service
-@Slf4j
 public class WishListService {
+    private static final Logger log = LoggerFactory.getLogger(WishListService.class);
 
     private static final Integer MAXIMUM_AMOUNT_OF_PRODUCTS = 20;
 
@@ -46,6 +48,7 @@ public class WishListService {
 
         if(Objects.isNull(customer.getWishList())){
             wishListModel.setProducts(new HashSet<Product>());
+            customer.setWishList(wishListModel);
         }else {
         	wishListModel = customer.getWishList();
             validarQuantidadeProdutosWishlist(wishListModel);
@@ -53,25 +56,24 @@ public class WishListService {
         log.info("Adding product to customer's wishlist");
         
         wishListModel.getProducts().add(product);
-        wishListModel.setCustomer(customer);
+        //wishListModel.setCustomer(customer);
         
         wishListModel = wishListRepository.save(wishListModel);
 
-        if(Objects.isNull(customer.getWishList())) {
-        	customer.setWishList(wishListModel);
-        	customerService.registry(customer);
-        }
+//        if(Objects.isNull(customer.getWishList())) {
+//        	customer.setWishList(wishListModel);
+//        	customerService.registry(customer);
+//        }
         log.info("Product was added to wishlist");
         return wishListModel;
     }
 
     public WishListOutputDto findAll(Long id){
-        log.info("Searching all products on the wishlist id: "+id);
         WishList wishList = findById(id);
-
         if(Objects.isNull(wishList)){
             throw new ResourceNotFoundException("Wishlist not found");
         }
+        log.info("Searching all products on the wishlist id: "+id);
         WishListOutputDto wishListOutputDto = modelMapper.map(wishList,WishListOutputDto.class);
         return wishListOutputDto;
     }

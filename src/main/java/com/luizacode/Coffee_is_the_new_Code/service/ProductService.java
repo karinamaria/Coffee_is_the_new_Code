@@ -8,14 +8,16 @@ import com.luizacode.Coffee_is_the_new_Code.repository.ProductRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@Slf4j
 public class ProductService {
+	private static final Logger log = LoggerFactory.getLogger(ProductService.class);
+
 	@Autowired
 	private ProductRepository productRepository;
 

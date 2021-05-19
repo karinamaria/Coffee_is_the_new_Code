@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import com.luizacode.Coffee_is_the_new_Code.error.ErrorDetail;
 import com.luizacode.Coffee_is_the_new_Code.error.ResourceNotFoundException;
 import com.luizacode.Coffee_is_the_new_Code.error.NegocioException;
-import com.sun.org.apache.xpath.internal.operations.Neg;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.luizacode.Coffee_is_the_new_Code.error.ValidationErrorDetails;
 
 @ControllerAdvice
-@Slf4j
 public class RestExceptionHandler {
+	private static final Logger log = LoggerFactory.getLogger(RestExceptionHandler.class);
 
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<?> handlerResourceNotFoundException(ResourceNotFoundException rnfException){

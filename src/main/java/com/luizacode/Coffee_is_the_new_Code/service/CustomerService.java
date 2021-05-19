@@ -4,15 +4,17 @@ import com.luizacode.Coffee_is_the_new_Code.error.ResourceNotFoundException;
 import com.luizacode.Coffee_is_the_new_Code.error.NegocioException;
 import com.luizacode.Coffee_is_the_new_Code.model.Customer;
 import com.luizacode.Coffee_is_the_new_Code.repository.CustomerRepository;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
 @Service
-@Slf4j
 public class CustomerService {
+    private static final Logger log = LoggerFactory.getLogger(CustomerService.class);
+
     @Autowired
     private CustomerRepository customerRepository;
 

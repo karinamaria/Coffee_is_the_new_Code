@@ -1,8 +1,22 @@
 package com.luizacode.Coffee_is_the_new_Code.controller;
 
-import static com.luizacode.Coffee_is_the_new_Code.Mother.CustomerMother.createCustomer;
-import static com.luizacode.Coffee_is_the_new_Code.Mother.CustomerMother.createCustomerInputDto;
-import static com.luizacode.Coffee_is_the_new_Code.Mother.CustomerMother.createCustomerOutputDto;
+import com.google.gson.Gson;
+import com.luizacode.Coffee_is_the_new_Code.dto.CustomerInputDto;
+import com.luizacode.Coffee_is_the_new_Code.dto.CustomerOutputDto;
+import com.luizacode.Coffee_is_the_new_Code.model.Customer;
+import com.luizacode.Coffee_is_the_new_Code.repository.CustomerRepository;
+import com.luizacode.Coffee_is_the_new_Code.service.CustomerService;
+import org.junit.jupiter.api.Test;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.Optional;
+
+import static com.luizacode.Coffee_is_the_new_Code.Mother.CustomerMother.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
@@ -12,21 +26,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import com.google.gson.Gson;
-import com.luizacode.Coffee_is_the_new_Code.dto.CustomerInputDto;
-import com.luizacode.Coffee_is_the_new_Code.dto.CustomerOutputDto;
-import com.luizacode.Coffee_is_the_new_Code.model.Customer;
-import com.luizacode.Coffee_is_the_new_Code.repository.CustomerRepository;
-import com.luizacode.Coffee_is_the_new_Code.service.CustomerService;
-import java.util.Optional;
-import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest({
 
@@ -57,8 +56,6 @@ public class CustomerControllerTest {
     CustomerInputDto customerInputDto = createCustomerInputDto();
     CustomerOutputDto customerOutputDto = createCustomerOutputDto();
 
-    given(modelMapper.map(org.mockito.ArgumentMatchers.any(), org.mockito.ArgumentMatchers.any()))
-        .willReturn(customer);
     given(customerService.save(any())).willReturn((customer));
     given(customerRepository.save(any())).willReturn(customer);
 

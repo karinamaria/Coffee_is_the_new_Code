@@ -34,7 +34,14 @@ public class CustomerController {
 	public ResponseEntity<?> save(@RequestBody @Valid CustomerInputDto customerInputDto){
 		Customer customerModel = modelMapper.map(customerInputDto, Customer.class);
 		customerModel = customerService.save(customerModel);
-		CustomerOutputDto customerOutput = modelMapper.map(customerModel, CustomerOutputDto.class);
+
+		CustomerOutputDto customerOutput =  new CustomerOutputDto();
+		customerOutput.setNome(customerModel.getNome());
+		customerOutput.setEmail(customerModel.getEmail());
+		customerOutput.setPassword(customerModel.getPassword());
+		customerOutput.setWishList(customerModel.getWishList());
+
+		modelMapper.map(customerModel, CustomerOutputDto.class);
 
 		return new ResponseEntity<>(customerOutput, HttpStatus.CREATED);
 	}

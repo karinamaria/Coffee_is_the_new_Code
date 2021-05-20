@@ -1,12 +1,11 @@
 package com.luizacode.Coffee_is_the_new_Code.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @ApiIgnore
 @Entity
@@ -31,6 +30,12 @@ public class Customer extends AbstractEntity {
     @JoinColumn(name = "wishlist_id", referencedColumnName = "id")
     @JsonIgnore
     private WishList wishList;
+
+    public Customer(String nome, String email, String password) {
+        this.nome = nome;
+        this.email = email;
+        this.password = password;
+    }
 
     public Customer ()
     {

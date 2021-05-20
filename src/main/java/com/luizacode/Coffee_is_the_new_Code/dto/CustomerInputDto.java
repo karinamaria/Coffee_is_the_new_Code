@@ -25,7 +25,13 @@ public class CustomerInputDto {
 	public CustomerInputDto() {
 		
 	}
-	
+
+	public CustomerInputDto(String nome, String email, String password) {
+		this.nome = nome;
+		this.email = email;
+		this.password = password;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -44,5 +50,6 @@ public class CustomerInputDto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 
 }

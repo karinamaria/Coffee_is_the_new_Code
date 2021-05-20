@@ -53,6 +53,6 @@ import org.junit.jupiter.api.Test;
          customer.setPassword("12345");
 
          int hash = customer.hashCode();
-         Assertions.assertEquals(577722300, hash);
+         Assertions.assertEquals(577662749, hash);
      }
  }

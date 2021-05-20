@@ -1,5 +1,6 @@
 package com.luizacode.Coffee_is_the_new_Code.model;
 
+import java.util.HashSet;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -26,7 +27,7 @@ public class WishList extends AbstractEntity {
             joinColumns={@JoinColumn(name="wishilist_id")},
             inverseJoinColumns={@JoinColumn(name="produto_id")})
     @JsonBackReference
-    private Set<Product> products;
+    private Set<Product> products  = new HashSet<>();
 
     public WishList (){}
 

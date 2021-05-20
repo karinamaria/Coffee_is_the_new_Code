@@ -5,6 +5,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @ApiIgnore
 public class CustomerOutputDto {
+
     private Long id;
     private String nome;
     private String email;
@@ -12,6 +13,15 @@ public class CustomerOutputDto {
     private WishList wishList;
 
     public CustomerOutputDto() {
+    }
+
+    public CustomerOutputDto(Long id, String nome, String email, String password,
+        WishList wishList) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.password = password;
+        this.wishList = wishList;
     }
 
     public Long getId() {

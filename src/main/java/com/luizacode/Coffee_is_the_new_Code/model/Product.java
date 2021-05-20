@@ -30,7 +30,7 @@ public class Product extends AbstractEntity {
 
     @ManyToMany(mappedBy="products")
     @JsonIgnore
-    private Set<WishList> wishLists;
+    private Set<WishList> wishLists = new HashSet<>();
 
     public Product (){
         wishLists = new HashSet<WishList>();

@@ -22,6 +22,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
+
 	@Autowired
 	private CustomerService customerService;
 
@@ -30,8 +31,8 @@ public class CustomerController {
 
 	@PostMapping
 	@ApiOperation(value = "Create an customer")
-	public ResponseEntity<?> save(@RequestBody @Valid CustomerInputDto customer){
-		Customer customerModel = modelMapper.map(customer, Customer.class);
+	public ResponseEntity<?> save(@RequestBody @Valid CustomerInputDto customerInputDto){
+		Customer customerModel = modelMapper.map(customerInputDto, Customer.class);
 		customerModel = customerService.save(customerModel);
 		CustomerOutputDto customerOutput = modelMapper.map(customerModel, CustomerOutputDto.class);
 

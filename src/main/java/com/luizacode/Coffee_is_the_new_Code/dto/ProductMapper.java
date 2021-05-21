@@ -1,0 +1,10 @@
+package com.luizacode.Coffee_is_the_new_Code.dto;
+
+import com.luizacode.Coffee_is_the_new_Code.model.Product;
+import org.mapstruct.Mapper;
+
+@Mapper(componentModel = "spring")
+public interface ProductMapper {
+    Product productInputDtoToProduct(ProductInputDto productInputDto);
+    ProductOutputDto productToProductOutputDto(Product product);
+}

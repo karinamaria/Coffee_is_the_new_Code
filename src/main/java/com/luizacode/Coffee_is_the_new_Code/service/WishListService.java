@@ -1,6 +1,7 @@
 package com.luizacode.Coffee_is_the_new_Code.service;
 
 import com.luizacode.Coffee_is_the_new_Code.dto.WishListInputDto;
+import com.luizacode.Coffee_is_the_new_Code.dto.WishListMapper;
 import com.luizacode.Coffee_is_the_new_Code.dto.WishListOutputDto;
 import com.luizacode.Coffee_is_the_new_Code.error.NegocioException;
 import com.luizacode.Coffee_is_the_new_Code.error.ResourceNotFoundException;
@@ -8,14 +9,13 @@ import com.luizacode.Coffee_is_the_new_Code.model.Customer;
 import com.luizacode.Coffee_is_the_new_Code.model.Product;
 import com.luizacode.Coffee_is_the_new_Code.model.WishList;
 import com.luizacode.Coffee_is_the_new_Code.repository.WishListRepository;
-import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
 
 @Service
 public class WishListService {
@@ -33,12 +33,10 @@ public class WishListService {
     private CustomerService customerService;
 
     @Autowired
-    private ModelMapper modelMapper;
+    private WishListMapper wishListMapper;
     
     public WishList findById(Long id) {
-    	WishList wishList = wishListRepository.findById(id).orElse(null);
-
-    	return wishList;
+    	return wishListRepository.findById(id).orElse(null);
     }
     
     public WishList save(WishListInputDto wishListInputDto){
@@ -56,14 +54,9 @@ public class WishListService {
         log.info("Adding product to customer's wishlist");
         
         wishListModel.getProducts().add(product);
-        //wishListModel.setCustomer(customer);
         
         wishListModel = wishListRepository.save(wishListModel);
 
-//        if(Objects.isNull(customer.getWishList())) {
-//        	customer.setWishList(wishListModel);
-//        	customerService.registry(customer);
-//        }
         log.info("Product was added to wishlist");
         return wishListModel;
     }
@@ -74,8 +67,8 @@ public class WishListService {
             throw new ResourceNotFoundException("Wishlist not found");
         }
         log.info("Searching all products on the wishlist id: "+id);
-        WishListOutputDto wishListOutputDto = modelMapper.map(wishList,WishListOutputDto.class);
-        return wishListOutputDto;
+
+        return wishListMapper.wishListToWishListOutputDto(wishList);
     }
 
     public void deleteProductOfWishlist(WishListInputDto wishListInputDto){

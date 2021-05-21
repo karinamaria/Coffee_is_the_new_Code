@@ -2,6 +2,7 @@ package com.luizacode.Coffee_is_the_new_Code.controller;
 
 import com.google.gson.Gson;
 import com.luizacode.Coffee_is_the_new_Code.dto.ProductInputDto;
+import com.luizacode.Coffee_is_the_new_Code.dto.ProductMapper;
 import com.luizacode.Coffee_is_the_new_Code.dto.ProductOutputDto;
 import com.luizacode.Coffee_is_the_new_Code.model.Product;
 import com.luizacode.Coffee_is_the_new_Code.repository.ProductRepository;
@@ -30,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
             ProductController.class,
             ProductService.class,
-            Produc
+            ProductMapper.class
     })
     public class ProductControllerTeste {
 

@@ -8,7 +8,6 @@ import com.luizacode.Coffee_is_the_new_Code.model.Customer;
 import com.luizacode.Coffee_is_the_new_Code.repository.CustomerRepository;
 import com.luizacode.Coffee_is_the_new_Code.service.CustomerService;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -32,7 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
         CustomerController.class,
         CustomerService.class,
-        ModelMapper.class,
         CustomerMapper.class
 })
 public class CustomerControllerTest {

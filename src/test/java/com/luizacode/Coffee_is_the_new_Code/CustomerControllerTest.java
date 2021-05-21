@@ -1,35 +1,17 @@
 package com.luizacode.Coffee_is_the_new_Code;
 
 import com.google.gson.Gson;
-import com.luizacode.Coffee_is_the_new_Code.Mother.CustomerMother;
-import com.luizacode.Coffee_is_the_new_Code.controller.CustomerController;
-import com.luizacode.Coffee_is_the_new_Code.dto.CustomerInputDto;
 import com.luizacode.Coffee_is_the_new_Code.model.Customer;
 import com.luizacode.Coffee_is_the_new_Code.repository.CustomerRepository;
 import com.luizacode.Coffee_is_the_new_Code.service.CustomerService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Optional;
-
-import static com.luizacode.Coffee_is_the_new_Code.Mother.CustomerMother.createCustomerInputDto;
 import static com.luizacode.Coffee_is_the_new_Code.Mother.CustomerMother.createCustomer;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -53,9 +35,6 @@ public class CustomerControllerTest {
 	private CustomerService customerService;
 	@MockBean
 	private CustomerRepository customerRepository;
-
-	@MockBean
-	private ModelMapper modelMapper;
 
 	@Test
 	public void givenValidCustomerWhenCreateThenReturnEntityCustomer() throws Exception {

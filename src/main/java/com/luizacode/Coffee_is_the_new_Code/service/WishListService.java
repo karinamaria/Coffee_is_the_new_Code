@@ -54,14 +54,9 @@ public class WishListService {
         log.info("Adding product to customer's wishlist");
         
         wishListModel.getProducts().add(product);
-        //wishListModel.setCustomer(customer);
         
         wishListModel = wishListRepository.save(wishListModel);
 
-//        if(Objects.isNull(customer.getWishList())) {
-//        	customer.setWishList(wishListModel);
-//        	customerService.registry(customer);
-//        }
         log.info("Product was added to wishlist");
         return wishListModel;
     }

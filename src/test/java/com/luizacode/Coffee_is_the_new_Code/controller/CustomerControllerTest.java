@@ -46,9 +46,6 @@ public class CustomerControllerTest {
     @MockBean
     private CustomerRepository customerRepository;
 
-//    @MockBean
-//    private ModelMapper modelMapper;
-
     @Test
     public void givenValidCustomerWhenCreateThenReturnEntityCustomer() throws Exception {
 
@@ -73,7 +70,6 @@ public class CustomerControllerTest {
                 .andExpect(jsonPath("$.password").value(customerOutputDto.getPassword()))
                 .andExpect(jsonPath("$.email").value(customerOutputDto.getEmail()));
     }
-
 
     @Test
     public void givenValidIdWhenGetCustomerByIdThenReturnOk() throws Exception {

@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         ProductService.class,
         ProductMapper.class
 })
-public class ProductControllerTeste {
+public class ProductControllerTest {
 
     private static final String PRODUCT_ENDPOINT = "/api/v1/product";
 
@@ -86,6 +86,21 @@ public class ProductControllerTeste {
         verify(productService, times(1)).findById(1L);
     }
 
+    @Test
+    public void givenANullTitleWhenCreateThenReturnBadRequest() throws Exception {
+        ProductInputDto productInputDto = createProductInputDto();
+        productInputDto.setTitle(null);
+
+        Gson gson = new Gson();
+        String jsonBody = gson.toJson(productInputDto);
+
+        mvc.perform(post(PRODUCT_ENDPOINT)
+                .content(jsonBody)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("utf-8")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
 
 }
 

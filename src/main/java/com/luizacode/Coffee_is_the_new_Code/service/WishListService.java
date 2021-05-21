@@ -103,7 +103,7 @@ public class WishListService {
     public boolean checkProductWishList(Long idCustomer, Long idProduct) {
     	Customer customer = customerService.findById(idCustomer);
     	boolean wishListHasProduct = false;
-    	if(Objects.nonNull(customer.getWishList().getProducts())) {
+    	if(Objects.nonNull(customer.getWishList())) {
     		Product product = productService.findById(idProduct);
     		log.info("Searching for product id: "+ product.getId() +" on wishlist id: "+customer.getWishList().getId());
     		wishListHasProduct = customer.getWishList().getProducts().contains(product);

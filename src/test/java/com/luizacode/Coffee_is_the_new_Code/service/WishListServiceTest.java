@@ -31,7 +31,7 @@ public class WishListServiceTest {
     private ProductService productService;
 
     @Test
-    public void givenValidWishListInputDtoAndIdProductWhenCreateThenReturnEntityWishList() throws Exception {
+    public void givenValidWishListInputDtoWhenCreateThenReturnEntityWishList() throws Exception {
         WishList wishList = createNewWishList();
         Customer customer = wishList.getCustomer();
         customer.setWishList(wishList);

@@ -54,6 +54,7 @@ Para o desenvolvimento do projeto foi utilizada o Scrum e Kanban, verifique nest
  <p>- Gabriela Ikenaga<br>
  - Júlia Falconi<br>
  - Karina Maria<br>
-   - Munique Garcia</p>
+ - Lara Yasmin<br>
+ - Munique Garcia</p>
   
 </html>

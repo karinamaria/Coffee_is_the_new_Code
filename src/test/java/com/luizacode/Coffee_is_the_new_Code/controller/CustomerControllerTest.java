@@ -46,9 +46,6 @@ public class CustomerControllerTest {
     @MockBean
     private CustomerRepository customerRepository;
 
-//    @MockBean
-//    private ModelMapper modelMapper;
-
     @Test
     public void givenValidCustomerWhenCreateThenReturnEntityCustomer() throws Exception {
 
@@ -74,7 +71,6 @@ public class CustomerControllerTest {
                 .andExpect(jsonPath("$.email").value(customerOutputDto.getEmail()));
     }
 
-
     @Test
     public void givenValidIdWhenGetCustomerByIdThenReturnOk() throws Exception {
 
@@ -83,8 +79,6 @@ public class CustomerControllerTest {
 
         given(customerService.findById(1L)).willReturn(customer);
         given(customerRepository.findById(1L)).willReturn(Optional.of(customer));
-//        given(modelMapper.map(org.mockito.ArgumentMatchers.any(), org.mockito.ArgumentMatchers.any()))
-//                .willReturn(customerOutputDto);
 
         mvc.perform(get(CUSTOMER_ENDPOINT + "/" + customerOutputDto.getId()))
                 .andExpect(status().isOk())

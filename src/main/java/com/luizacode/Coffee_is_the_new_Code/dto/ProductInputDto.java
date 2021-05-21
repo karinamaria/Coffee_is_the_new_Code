@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 
 @ApiModel(value = "Product")
 public class ProductInputDto {
+    @NotNull
     @NotEmpty
     @ApiModelProperty(example = "title", required = true)
     private String title;

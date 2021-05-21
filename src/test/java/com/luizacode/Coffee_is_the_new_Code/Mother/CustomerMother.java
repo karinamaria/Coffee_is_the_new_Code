@@ -14,7 +14,7 @@ public class CustomerMother {
   }
 
   public static Customer createCustomer() {
-    return new Customer("Luciana", "luciana@email.com", "122452");
+    return new Customer(1L, "Luciana", "luciana@email.com", "122452");
   }
 
   public static CustomerOutputDto createCustomerOutputDto() {

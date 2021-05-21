@@ -43,7 +43,7 @@ public class ProductController {
     }
 
     @GetMapping("/{idProduct}")
-    @ApiOperation(value = "Find customer by id")
+    @ApiOperation(value = "Find product by id")
     public ResponseEntity<ProductOutputDto> findProductById(@PathVariable Long idProduct){
         ProductOutputDto productOutputDto = productMapper.productToProductOutputDto(productService.findById(idProduct));
 

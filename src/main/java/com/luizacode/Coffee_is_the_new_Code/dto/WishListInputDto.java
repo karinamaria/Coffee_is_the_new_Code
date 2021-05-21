@@ -32,6 +32,11 @@ public class WishListInputDto {
 //		this.idWishList = idWishList;
 //	}
 
+	public WishListInputDto(Long idProduct, Long idCustomer) {
+		this.idProduct = idProduct;
+		this.idCustomer = idCustomer;
+	}
+
 	public Long getIdProduct() {
 		return idProduct;
 	}

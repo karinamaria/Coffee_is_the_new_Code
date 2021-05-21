@@ -27,66 +27,65 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-    @WebMvcTest({
+@WebMvcTest({
 
-            ProductController.class,
-            ProductService.class,
-            ProductMapper.class
-    })
-    public class ProductControllerTeste {
+        ProductController.class,
+        ProductService.class,
+        ProductMapper.class
+})
+public class ProductControllerTeste {
 
-        private static final String PRODUCT_ENDPOINT = "/api/v1/product";
+    private static final String PRODUCT_ENDPOINT = "/api/v1/product";
 
-        @Autowired
-        private MockMvc mvc;
+    @Autowired
+    private MockMvc mvc;
 
-        @MockBean
-        private ProductService productService;
+    @MockBean
+    private ProductService productService;
 
-        @MockBean
-        private ProductRepository productRepository;
-
-
-        @Test
-        public void givenValidProductWhenCreateThenReturnEntityProduct() throws Exception {
-
-            Product product = createProduct ();
-            ProductInputDto productInputDto= createProductInputDto();
-
-            given(productService.save(any())).willReturn((product));
-            given(productRepository.save(any())).willReturn(product);
-
-            Gson gson = new Gson();
-            String jsonBody = gson.toJson(productInputDto);
-
-            mvc.perform(post(PRODUCT_ENDPOINT)
-                    .content(jsonBody)
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .characterEncoding("utf-8")
-                    .accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isCreated());
-        }
-
-        @Test
-        public void givenValidIdWhenGetProductByIdThenReturnOk() throws Exception {
-
-            Product product = createProduct();
-            ProductOutputDto productOutputDto = createProductOutputDto();
-
-            given(productService.findById(1L)).willReturn(product);
-            given(productRepository.findById(1L)).willReturn(Optional.of(product));
-
-            mvc.perform(get(PRODUCT_ENDPOINT + "/" + productOutputDto.getId()))
-                    .andExpect(status().isOk())
-                    .andDo(print())
-                    .andExpect(jsonPath("$.title").value(productOutputDto.getTitle()))
-                    .andExpect(jsonPath("$.avaliableQuantity").value(productOutputDto.getAvaliableQuantity()))
-                    .andExpect(jsonPath("$.price").value(productOutputDto.getPrice()));
-
-            verify(productService, times(1)).findById(1L);
-        }
+    @MockBean
+    private ProductRepository productRepository;
 
 
+    @Test
+    public void givenValidProductWhenCreateThenReturnEntityProduct() throws Exception {
 
+        Product product = createProduct();
+        ProductInputDto productInputDto = createProductInputDto();
+
+        given(productService.save(any())).willReturn((product));
+        given(productRepository.save(any())).willReturn(product);
+
+        Gson gson = new Gson();
+        String jsonBody = gson.toJson(productInputDto);
+
+        mvc.perform(post(PRODUCT_ENDPOINT)
+                .content(jsonBody)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("utf-8")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
     }
+
+    @Test
+    public void givenValidIdWhenGetProductByIdThenReturnOk() throws Exception {
+
+        Product product = createProduct();
+        ProductOutputDto productOutputDto = createProductOutputDto();
+
+        given(productService.findById(1L)).willReturn(product);
+        given(productRepository.findById(1L)).willReturn(Optional.of(product));
+
+        mvc.perform(get(PRODUCT_ENDPOINT + "/" + productOutputDto.getId()))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$.title").value(productOutputDto.getTitle()))
+                .andExpect(jsonPath("$.avaliableQuantity").value(productOutputDto.getAvaliableQuantity()))
+                .andExpect(jsonPath("$.price").value(productOutputDto.getPrice()));
+
+        verify(productService, times(1)).findById(1L);
+    }
+
+
+}
 

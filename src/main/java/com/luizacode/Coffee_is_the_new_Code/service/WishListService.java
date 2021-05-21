@@ -1,8 +1,6 @@
 package com.luizacode.Coffee_is_the_new_Code.service;
 
-import com.luizacode.Coffee_is_the_new_Code.dto.WishListInputDto;
-import com.luizacode.Coffee_is_the_new_Code.dto.WishListMapper;
-import com.luizacode.Coffee_is_the_new_Code.dto.WishListOutputDto;
+import com.luizacode.Coffee_is_the_new_Code.dto.*;
 import com.luizacode.Coffee_is_the_new_Code.error.NegocioException;
 import com.luizacode.Coffee_is_the_new_Code.error.ResourceNotFoundException;
 import com.luizacode.Coffee_is_the_new_Code.model.Customer;
@@ -14,8 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class WishListService {
@@ -34,6 +32,9 @@ public class WishListService {
 
     @Autowired
     private WishListMapper wishListMapper;
+
+    @Autowired
+    private ProductMapper productMapper;
     
     public WishList findById(Long id) {
     	return wishListRepository.findById(id).orElse(null);
@@ -61,14 +62,17 @@ public class WishListService {
         return wishListModel;
     }
 
-    public WishListOutputDto findAll(Long id){
+    public List<ProductOutputDto> findAll(Long id){
         WishList wishList = findById(id);
         if(Objects.isNull(wishList)){
             throw new ResourceNotFoundException("Wishlist not found");
         }
         log.info("Searching all products on the wishlist id: "+id);
 
-        return wishListMapper.wishListToWishListOutputDto(wishList);
+        List<ProductOutputDto> productOutput = wishList.getProducts().stream()
+                .map(element -> productMapper.productToProductOutputDto(element)).collect(Collectors.toList());
+
+        return productOutput;
     }
 
     public void deleteProductOfWishlist(WishListInputDto wishListInputDto){

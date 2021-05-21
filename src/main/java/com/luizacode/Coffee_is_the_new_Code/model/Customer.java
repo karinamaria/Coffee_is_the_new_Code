@@ -35,7 +35,8 @@ public class Customer extends AbstractEntity {
   @JsonIgnore
   private WishList wishList;
 
-  public Customer(String nome, String email, String password) {
+  public Customer(Long id, String nome, String email, String password) {
+    this.id = id;
     this.nome = nome;
     this.email = email;
     this.password = password;

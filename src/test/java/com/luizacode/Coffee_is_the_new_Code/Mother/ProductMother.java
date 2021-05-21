@@ -11,7 +11,7 @@ import java.util.List;
 public class ProductMother {
 
     public static Product createProduct(){
-        return new Product("Computador", 1, new BigDecimal(5.59600));
+        return new Product(1L, "Computador", 1, new BigDecimal(5.59600));
     }
 
 
@@ -23,7 +23,11 @@ public class ProductMother {
         return new ProductOutputDto(1L, "Computador", 1, new BigDecimal(5.59600));
     }
 
-    public static List<ProductOutputDto> getListProducts(){
+    public static List<ProductOutputDto> createListProductOutputDto(){
         return Arrays.asList(new ProductOutputDto(1L, "Computador", 1, new BigDecimal(5.59600)));
+    }
+
+    public static List<Product> createListProduct(){
+        return Arrays.asList(new Product(1L, "Computador", 1, new BigDecimal(5.59600)));
     }
 }

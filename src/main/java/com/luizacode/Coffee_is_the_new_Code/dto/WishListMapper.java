@@ -7,4 +7,6 @@ import org.mapstruct.Mapper;
 public interface WishListMapper {
 
     WishListOutputDto wishListToWishListOutputDto(WishList wishList);
+
+    WishListInputDto wishListToWishListInputDto(WishList wishList);
 }

@@ -10,12 +10,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static com.luizacode.Coffee_is_the_new_Code.Mother.ProductMother.*;
-import static org.mockito.ArgumentMatchers.any;
+import static com.luizacode.Coffee_is_the_new_Code.Mother.ProductMother.createListProductOutputDto;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,8 +31,8 @@ public class WishListControllerTest {
     private WishListService wishListService;
 
     @Test
-    public void givenAValidWishListIdWhengetListProductsThenReturnListProduct() throws Exception {
-        List<ProductOutputDto> productOutputDtoListList = getListProducts();
+    public void givenAValidIdWishListWhenGetListProductsThenReturnListProduct() throws Exception {
+        List<ProductOutputDto> productOutputDtoListList = createListProductOutputDto();
         given(wishListService.findAllProductWishList(1L)).willReturn(productOutputDtoListList);
 
         mvc.perform(get(WISHLIST_ENDPOINT + "/" + "1"))

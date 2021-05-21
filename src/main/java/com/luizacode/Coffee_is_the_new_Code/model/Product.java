@@ -34,7 +34,8 @@ public class Product extends AbstractEntity {
     @JsonIgnore
     private Set<WishList> wishLists = new HashSet<>();
 
-    public Product(String title, Integer avaliableQuantity, BigDecimal price) {
+    public Product(Long id, String title, Integer avaliableQuantity, BigDecimal price) {
+        this.id = id;
         this.title = title;
         this.avaliableQuantity = avaliableQuantity;
         this.price = price;

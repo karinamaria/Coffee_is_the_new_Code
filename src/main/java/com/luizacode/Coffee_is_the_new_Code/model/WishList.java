@@ -31,6 +31,12 @@ public class WishList extends AbstractEntity {
 
     public WishList (){}
 
+    public WishList(Long id, Customer customer, Set<Product> products) {
+        this.id = id;
+        this.customer = customer;
+        this.products = products;
+    }
+
     public Customer getCustomer() {
         return customer;
     }

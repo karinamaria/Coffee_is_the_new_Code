@@ -79,8 +79,6 @@ public class CustomerControllerTest {
 
         given(customerService.findById(1L)).willReturn(customer);
         given(customerRepository.findById(1L)).willReturn(Optional.of(customer));
-//        given(modelMapper.map(org.mockito.ArgumentMatchers.any(), org.mockito.ArgumentMatchers.any()))
-//                .willReturn(customerOutputDto);
 
         mvc.perform(get(CUSTOMER_ENDPOINT + "/" + customerOutputDto.getId()))
                 .andExpect(status().isOk())

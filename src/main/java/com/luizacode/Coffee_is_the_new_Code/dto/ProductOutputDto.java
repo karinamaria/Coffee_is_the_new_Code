@@ -17,6 +17,13 @@ public class ProductOutputDto {
     @JsonIgnore
     private Set<WishList> wishLists;
 
+    public ProductOutputDto(Long id, String title, Integer avaliableQuantity, BigDecimal price) {
+        this.id = id;
+        this.title = title;
+        this.avaliableQuantity = avaliableQuantity;
+        this.price = price;
+    }
+
     public ProductOutputDto() {
     }
 

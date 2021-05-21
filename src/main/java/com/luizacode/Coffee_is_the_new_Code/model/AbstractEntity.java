@@ -39,4 +39,5 @@ public abstract class AbstractEntity implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }

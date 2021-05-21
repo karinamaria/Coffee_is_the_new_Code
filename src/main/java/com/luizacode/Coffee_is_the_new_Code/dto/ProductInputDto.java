@@ -29,6 +29,12 @@ public class ProductInputDto {
     public ProductInputDto() {
     }
 
+    public ProductInputDto(String title, Integer avaliableQuantity, BigDecimal price) {
+        this.title = title;
+        this.avaliableQuantity = avaliableQuantity;
+        this.price = price;
+    }
+
     public String getTitle() {
         return title;
     }

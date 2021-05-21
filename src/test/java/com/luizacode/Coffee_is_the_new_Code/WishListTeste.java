@@ -33,15 +33,5 @@ public class WishListTeste {
 
         Assertions.assertNotEquals(wishlist1, wishlist2);
     }
-    public void generateHashTest () {
-        WishList wishlist = new WishList();
-        wishlist.setCustomer(wishlist.getCustomer());
-        wishlist.setId(2652266L);
-        wishlist.setProducts(wishlist.getProducts());
-
-        int hash = wishlist.hashCode();
-        System.out.println(hashCode());
-        //Assertions.assertEquals(1414045044, hash);
-    }
 
 }

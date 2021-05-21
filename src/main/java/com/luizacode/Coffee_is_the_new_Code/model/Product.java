@@ -1,15 +1,17 @@
 package com.luizacode.Coffee_is_the_new_Code.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import springfox.documentation.annotations.ApiIgnore;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @ApiIgnore
@@ -31,6 +33,12 @@ public class Product extends AbstractEntity {
     @ManyToMany(mappedBy="products")
     @JsonIgnore
     private Set<WishList> wishLists = new HashSet<>();
+
+    public Product(String title, Integer avaliableQuantity, BigDecimal price) {
+        this.title = title;
+        this.avaliableQuantity = avaliableQuantity;
+        this.price = price;
+    }
 
     public Product (){
         wishLists = new HashSet<WishList>();
@@ -67,6 +75,7 @@ public class Product extends AbstractEntity {
     public void setWishLists(Set<WishList> wishLists) {
         this.wishLists = wishLists;
     }
+
 
     @Override
     public boolean equals(Object o) {

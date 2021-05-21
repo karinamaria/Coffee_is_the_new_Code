@@ -52,7 +52,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
             Product product = createProduct ();
             ProductInputDto productInputDto= createProductInputDto();
-            ProductOutputDto productOutputDto = createProductOutputDto();
 
             given(productService.save(any())).willReturn((product));
             given(productRepository.save(any())).willReturn(product);
@@ -65,15 +64,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                     .contentType(MediaType.APPLICATION_JSON)
                     .characterEncoding("utf-8")
                     .accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isCreated())
-                    .andDo(print())
-                    .andExpect(jsonPath("$.title").value(productOutputDto.getTitle()))
-                    .andExpect(jsonPath("$.avaliableQuantity").value(productOutputDto.getAvaliableQuantity()))
-                    .andExpect(jsonPath("$.price").value(productOutputDto.getPrice()));
+                    .andExpect(status().isCreated());
         }
-
-
-
 
         @Test
         public void givenValidIdWhenGetProductByIdThenReturnOk() throws Exception {

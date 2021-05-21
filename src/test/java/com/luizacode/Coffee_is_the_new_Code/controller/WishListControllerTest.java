@@ -1,7 +1,6 @@
 package com.luizacode.Coffee_is_the_new_Code.controller;
 
 import com.luizacode.Coffee_is_the_new_Code.dto.ProductOutputDto;
-import com.luizacode.Coffee_is_the_new_Code.dto.WishListInputDto;
 import com.luizacode.Coffee_is_the_new_Code.service.WishListService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import java.util.List;
 import static com.luizacode.Coffee_is_the_new_Code.Mother.ProductMother.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -38,7 +36,7 @@ public class WishListControllerTest {
     @Test
     public void givenAValidWishListIdWhengetListProductsThenReturnListProduct() throws Exception {
         List<ProductOutputDto> productOutputDtoListList = getListProducts();
-        given(wishListService.findAll(1L)).willReturn(productOutputDtoListList);
+        given(wishListService.findAllProductWishList(1L)).willReturn(productOutputDtoListList);
 
         mvc.perform(get(WISHLIST_ENDPOINT + "/" + "1"))
                 .andExpect(status().isOk())

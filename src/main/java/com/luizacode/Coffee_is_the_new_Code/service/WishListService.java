@@ -62,7 +62,7 @@ public class WishListService {
         return wishListModel;
     }
 
-    public List<ProductOutputDto> findAll(Long id){
+    public List<ProductOutputDto> findAllProductWishList(Long id){
         WishList wishList = findById(id);
         if(Objects.isNull(wishList)){
             throw new ResourceNotFoundException("Wishlist not found");

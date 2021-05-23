@@ -51,10 +51,10 @@ Para o desenvolvimento do projeto foi utilizada o Scrum e Kanban, verifique nest
   -Swagger<br>
 
 <h2>Desenvolvedoras</h2>
- <p>- Gabriela Ikenaga<br>
- - Júlia Falconi<br>
- - Karina Maria<br>
+ <p>- <a href="https://github.com/gabikenaga" target="_blank">Gabriela Ikenaga</a><br>
+ - <a href="https://github.com/juliafalconi" target="_blank">Júlia Falconi</a><br>
+ - <a href="https://github.com/karinamaria" target="_blank">Karina Maria</a><br>
  - Lara Yasmin<br>
- - Munique Garcia</p>
+ - <a href="https://github.com/MuniqueGarcia" target="_blank">Munique Garcia</a></p>
   
 </html>
